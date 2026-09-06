@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Velocity Motion Simulation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Velocity-Time Motion Simulation</h2>
+<div class="controls">
+<button id="playBtn">PLAY</button>
+<button id="stopBtn">STOP</button>
+<button id="resetBtn">RESET</button>
+</div>
 
+<div class="graphPanel">
+<h3>Velocity-Time Graph</h3>
+<canvas id="velocityCanvas"></canvas>
+</div>
+
+<div class="carPanel">
+<h3>Moving Car Simulation</h3>
+<div class="road">
+<div class="mark m0">0 m</div>
+<div class="mark m50">50 m</div>
+<div class="mark m140">140 m</div>
+<div id="carContainer">
+<svg id="carSVG" width="80" height="40" viewBox="0 0 300 150">
+<rect x="50" y="60" width="200" height="50" rx="20" fill="red"/>
+<rect x="90" y="30" width="120" height="40" rx="20" fill="red"/>
+<rect x="100" y="35" width="40" height="30" rx="10" fill="lightblue"/>
+<rect x="150" y="35" width="50" height="30" rx="10" fill="lightblue"/>
+<circle cx="100" cy="120" r="15" fill="black"/>
+<circle cx="200" cy="120" r="15" fill="black"/>
+<circle cx="100" cy="120" r="7" fill="gray"/>
+<circle cx="200" cy="120" r="7" fill="gray"/>
+<circle cx="250" cy="85" r="5" fill="yellow"/>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="graphPanel">
+<h3>Acceleration-Time Graph</h3>
+<canvas id="accCanvas"></canvas>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

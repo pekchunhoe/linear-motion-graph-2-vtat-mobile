@@ -1,0 +1,458 @@
+/* =========================================================
+   VELOCITY MOTION SIMULATION
+   FINAL MOBILE-FIRST RESPONSIVE CSS
+   ========================================================= */
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+body {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8px;
+    background: #f5f5f5;
+    overflow-x: hidden;
+}
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+h2 {
+    margin: 6px 0 10px;
+    text-align: center;
+    font-size: clamp(18px, 5vw, 30px);
+    line-height: 1.2;
+}
+h3 {
+    margin: 2px 0 7px;
+    text-align: center;
+    font-size: clamp(14px, 4vw, 22px);
+    line-height: 1.2;
+}
+/* =========================================================
+   CONTROL BUTTONS
+   ========================================================= */
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 7px 0 10px;
+}
+button {
+    min-width: 70px;
+    min-height: 40px;
+    padding: 8px 11px;
+    border: 1px solid #888;
+    border-radius: 7px;
+    background: #eeeeee;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    /* Touch friendly */
+    touch-action: manipulation;
+    /* Prevent text selection */
+    user-select: none;
+    -webkit-user-select: none;
+    /* Prevent iOS tap highlight */
+    -webkit-tap-highlight-color: transparent;
+}
+button:active {
+    transform: scale(0.97);
+}
+button:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+}
+/* =========================================================
+   PANELS
+   ========================================================= */
+.graphPanel,
+.carPanel {
+    width: 100%;
+    max-width: 100%;
+    margin: 9px auto;
+    padding: 7px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+/* =========================================================
+   CANVAS
+   ========================================================= */
+canvas {
+    display: block;
+    width: 100%;
+    height: 220px;
+    max-width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background: #ffffff;
+    /*
+       IMPORTANT:
+       Prevents page scrolling while the user
+       drags the graph with a finger or Apple Pencil.
+    */
+    touch-action: none;
+    /* Prevent selection while dragging */
+    user-select: none;
+    -webkit-user-select: none;
+    /* Prevent iOS tap highlight */
+    -webkit-tap-highlight-color: transparent;
+    /* Prevent browser image dragging */
+    -webkit-user-drag: none;
+}
+/* =========================================================
+   ROAD
+   ========================================================= */
+.road {
+    position: relative;
+    width: 100%;
+    height: 105px;
+    background: #dddddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+/* =========================================================
+   ROAD CENTRE LINE
+   ========================================================= */
+.road::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 52px;
+    width: 100%;
+    height: 3px;
+    background: #000000;
+    pointer-events: none;
+    z-index: 1;
+}
+/* =========================================================
+   CAR
+   ========================================================= */
+#carContainer {
+    position: absolute;
+    left: 0;
+    top: 27px;
+    width: 60px;
+    height: auto;
+    z-index: 5;
+    /*
+       JavaScript controls the car position.
+    */
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+#carSVG {
+    display: block;
+    width: 60px;
+    height: auto;
+    max-width: none;
+    transform-origin: center center;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+/* =========================================================
+   DISTANCE MARKERS
+   ========================================================= */
+.mark {
+    position: absolute;
+    top: 70px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 4;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.m0 {
+    left: 0;
+}
+.m50 {
+    left: 33.33%;
+    transform: translateX(-50%);
+}
+.m140 {
+    right: 0;
+}
+/* =========================================================
+   VERY SMALL PHONE
+   320–374 px
+   ========================================================= */
+@media (max-width: 374px) {
+    body {
+        padding: 5px;
+    }
+    h2 {
+        font-size: 18px;
+        margin: 5px 0 7px;
+    }
+    h3 {
+        font-size: 14px;
+        margin: 2px 0 6px;
+    }
+    .controls {
+        gap: 5px;
+        margin-bottom: 7px;
+    }
+    button {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 8px;
+        font-size: 12px;
+    }
+    .graphPanel,
+    .carPanel {
+        padding: 6px;
+        margin: 7px auto;
+        border-radius: 7px;
+    }
+    canvas {
+        height: 200px;
+    }
+    .road {
+        height: 95px;
+    }
+    .road::after {
+        top: 47px;
+        height: 3px;
+    }
+    #carContainer {
+        top: 24px;
+        width: 52px;
+    }
+    #carSVG {
+        width: 52px;
+    }
+    .mark {
+        top: 63px;
+        font-size: 10px;
+    }
+}
+/* =========================================================
+   STANDARD MOBILE PHONE
+   375–599 px
+   ========================================================= */
+@media (min-width: 375px) and (max-width: 599px) {
+    canvas {
+        height: 230px;
+    }
+    .road {
+        height: 110px;
+    }
+    .road::after {
+        top: 55px;
+        height: 3px;
+    }
+    #carContainer {
+        top: 29px;
+        width: 62px;
+    }
+    #carSVG {
+        width: 62px;
+    }
+    .mark {
+        top: 73px;
+        font-size: 11px;
+    }
+}
+/* =========================================================
+   TABLET / iPAD
+   600–899 px
+   ========================================================= */
+@media (min-width: 600px) {
+    body {
+        padding: 15px;
+    }
+    h2 {
+        font-size: 26px;
+        margin: 10px 0 14px;
+    }
+    h3 {
+        font-size: 20px;
+        margin-bottom: 9px;
+    }
+    .controls {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    button {
+        min-width: 88px;
+        min-height: 42px;
+        padding: 9px 16px;
+        font-size: 14px;
+    }
+    .graphPanel,
+    .carPanel {
+        padding: 11px;
+        margin: 14px auto;
+        border-radius: 10px;
+    }
+    canvas {
+        height: 300px;
+    }
+    .road {
+        height: 135px;
+    }
+    .road::after {
+        top: 67px;
+        height: 4px;
+    }
+    #carContainer {
+        top: 36px;
+        width: 75px;
+    }
+    #carSVG {
+        width: 75px;
+    }
+    .mark {
+        top: 87px;
+        font-size: 13px;
+    }
+}
+/* =========================================================
+   LAPTOP / DESKTOP
+   900 px AND ABOVE
+   ========================================================= */
+@media (min-width: 900px) {
+    body {
+        padding: 20px;
+    }
+    h2 {
+        font-size: 30px;
+        margin: 10px 0 16px;
+    }
+    h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    .controls {
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+    button {
+        min-width: 90px;
+        min-height: 44px;
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+    .graphPanel,
+    .carPanel {
+        max-width: 1000px;
+        padding: 15px;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+    canvas {
+        height: 350px;
+    }
+    .road {
+        height: 150px;
+    }
+    .road::after {
+        top: 75px;
+        height: 4px;
+    }
+    #carContainer {
+        top: 40px;
+        width: 80px;
+    }
+    #carSVG {
+        width: 80px;
+    }
+    .mark {
+        top: 95px;
+        font-size: 14px;
+    }
+}
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+@media (min-width: 1200px) {
+    body {
+        max-width: 1200px;
+    }
+}
+/* =========================================================
+   PHONE LANDSCAPE
+   ========================================================= */
+@media (max-height: 500px)
+       and (orientation: landscape) {
+    body {
+        padding: 6px;
+    }
+    h2 {
+        margin: 4px 0 6px;
+    }
+    .graphPanel,
+    .carPanel {
+        margin: 7px auto;
+        padding: 6px;
+    }
+    canvas {
+        height: 180px;
+    }
+    .road {
+        height: 90px;
+    }
+    .road::after {
+        top: 45px;
+    }
+    #carContainer {
+        top: 23px;
+    }
+    .mark {
+        top: 60px;
+    }
+}
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration:
+            0.01ms !important;
+        animation-duration:
+            0.01ms !important;
+        animation-iteration-count:
+            1 !important;
+    }
+}
+/* =========================================================
+   FOCUS / CONTRAST
+   ========================================================= */
+button:focus-visible,
+canvas:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+}
+/* =========================================================
+   PREVENT OVERFLOW
+   ========================================================= */
+img,
+svg,
+canvas {
+    max-width: 100%;
+}
